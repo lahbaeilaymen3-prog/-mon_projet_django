@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail livraison</title>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}?v=2">
+</head>
+<body>
+    <header>
+        <h1>Détail de la livraison</h1>
+        <p>Informations complètes sur une livraison</p>
+    </header>
+
+    <main>
+      <div class="card">
+    <h2>{{ livraison.nom_expediteur }} vers {{ livraison.nom_destinataire }}</h2>
+    <p><strong>Adresse :</strong> {{ livraison.adresse_livraison }}</p>
+    <p><strong>Téléphone :</strong> {{ livraison.telephone_destinataire }}</p>
+    <p><strong>Colis :</strong> {{ livraison.description_colis }}</p>
+    <p><strong>Poids :</strong> {{ livraison.poids_colis }} kg</p>
+    <p><strong>Prix :</strong> {{ livraison.prix_livraison }} TND</p>
+   <p>
+    <strong>Statut :</strong>
+    {% if livraison.statut == 'en_attente' %}
+        <span class="badge badge-attente">{{ livraison.get_statut_display }}</span>
+    {% elif livraison.statut == 'en_cours' %}
+        <span class="badge badge-cours">{{ livraison.get_statut_display }}</span>
+    {% elif livraison.statut == 'livree' %}
+        <span class="badge badge-livree">{{ livraison.get_statut_display }}</span>
+    {% elif livraison.statut == 'annulee' %}
+        <span class="badge badge-annulee">{{ livraison.get_statut_display }}</span>
+    {% else %}
+        <span class="badge">{{ livraison.get_statut_display }}</span>
+    {% endif %}
+</p>
+    <hr>
+    <p><a href="/">Retour à l’accueil</a></p>
+</div>
+    </main>
+</body>
+</html>

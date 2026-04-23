@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Société de Livraison</title>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}?v=2">
+</head>
+<body>
+    <header>
+        <h1>Gestion des livraisons</h1>
+        <p>Bienvenue dans notre application de gestion des livraisons.</p>
+    </header>
+
+    <main>
+        {% for livraison in livraisons %}
+            <div class="card">
+    <h2>{{ livraison.nom_expediteur }} vers {{ livraison.nom_destinataire }}</h2>
+    <p>
+    <strong>Statut :</strong>
+    {% if livraison.statut == 'en_attente' %}
+        <span class="badge badge-attente">{{ livraison.get_statut_display }}</span>
+    {% elif livraison.statut == 'en_cours' %}
+        <span class="badge badge-cours">{{ livraison.get_statut_display }}</span>
+    {% elif livraison.statut == 'livree' %}
+        <span class="badge badge-livree">{{ livraison.get_statut_display }}</span>
+    {% elif livraison.statut == 'annulee' %}
+        <span class="badge badge-annulee">{{ livraison.get_statut_display }}</span>
+    {% else %}
+        <span class="badge">{{ livraison.get_statut_display }}</span>
+    {% endif %}
+</p>
+    <p><a href="{% url 'detail_livraison' livraison.id %}">Voir les détails</a></p>
+    <hr>
+</div>
+        {% empty %}
+            <p>Aucune livraison enregistrée pour le moment.</p>
+        {% endfor %}
+    </main>
+</body>
+</html>
