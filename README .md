@@ -119,4 +119,4 @@ https://github.com/lahbaeilaymen3-prog/-mon_projet_django
 
 ## Auteur
 
-Projet réalisé par Skander Lahbaiel.
+Projet réalisé par Aymen Lahbaeil.
